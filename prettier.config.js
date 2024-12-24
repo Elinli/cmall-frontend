@@ -10,7 +10,7 @@ export default {
   printWidth: 80,
   arrowParens: 'always',
   proseWrap: 'always',
-  endOfLine: 'lf',
+  endOfLine: 'crlf',
   experimentalTernaries: false,
   tabWidth: 2,
   useTabs: false,
@@ -22,4 +22,3 @@ export default {
   vueIndentScriptAndStyle: false,
   singleAttributePerLine: false,
 }
-

@@ -12,6 +12,7 @@
 *.json
 eslint.config.js
 prettier.config.js
+*/tailwind.css
  
 # 测试和打包目录
 /test/
