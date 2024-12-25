@@ -8,16 +8,13 @@ import {
 } from '../types/api'
 
 export const login = async (data: LoginRequest): Promise<LoginResponse> => {
-  const response = await apiClient.post<LoginResponse>('/auth/login', data)
+  const response = await apiClient.post<LoginResponse>('/api/signin', data)
   return response.data
 }
 
 export const register = async (
   data: RegisterRequest,
 ): Promise<RegisterResponse> => {
-  const response = await apiClient.post<RegisterResponse>(
-    '/auth/register',
-    data,
-  )
+  const response = await apiClient.post<RegisterResponse>('/api/signup', data)
   return response.data
 }

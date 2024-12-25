@@ -1,14 +1,10 @@
 // src/views/login/SignUp.tsx
 import type { FormProps } from 'antd'
-import {
-  LockOutlined,
-  UserOutlined,
-  CloudUploadOutlined,
-} from '@ant-design/icons'
-import { Button, Form, Input, message } from 'antd'
+import { LockOutlined, CloudUploadOutlined } from '@ant-design/icons'
+import { Button, Form, Input, message, Flex, Checkbox } from 'antd'
 import { Props } from './'
 import { useNavigate } from 'react-router-dom'
-import { register } from '@/apis/user'
+import { login } from '@/apis/user'
 
 type FieldType = {
   email: string
@@ -21,22 +17,27 @@ export default function SignUp({ funcParent }: Props) {
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
-      const response = await register(values)
+      const params = {
+        email: values.email,
+        password: values.password,
+      }
+      const response = await login(params)
       localStorage.setItem('token', response.token)
       navigate('/home', { state: values })
       message.success('注册成功！')
-    } catch {
+    } catch (err) {
       message.error('注册失败，请检查输入信息。')
+      return err
     }
   }
 
-  const handleClickSignIn = () => {
+  const handleClickSignUp = () => {
     funcParent('in')
   }
 
   return (
     <Form
-      name="register"
+      name="login"
       initialValues={{ remember: true }}
       style={{ maxWidth: 360 }}
       onFinish={onFinish}
@@ -48,12 +49,6 @@ export default function SignUp({ funcParent }: Props) {
         <Input prefix={<CloudUploadOutlined />} placeholder="Email" />
       </Form.Item>
       <Form.Item
-        name="fullname"
-        rules={[{ required: true, message: 'Please input your Fullname!' }]}
-      >
-        <Input prefix={<UserOutlined />} placeholder="Fullname" />
-      </Form.Item>
-      <Form.Item
         name="password"
         rules={[{ required: true, message: 'Please input your Password!' }]}
       >
@@ -63,14 +58,22 @@ export default function SignUp({ funcParent }: Props) {
           placeholder="Password"
         />
       </Form.Item>
+      <Form.Item>
+        <Flex justify="space-between" align="center">
+          <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+          <Button type="link">Forgot password</Button>
+        </Flex>
+      </Form.Item>
 
       <Form.Item>
         <Button block type="primary" htmlType="submit">
-          Sign Up
+          Sign In
         </Button>
         or
-        <Button type="link" onClick={handleClickSignIn}>
-          Sign In
+        <Button color="default" variant="link" onClick={handleClickSignUp}>
+          Sign Up
         </Button>
       </Form.Item>
     </Form>
