@@ -4,6 +4,7 @@ import UnoCSS from 'unocss/vite'
 import presetAttributify from '@unocss/preset-attributify'
 import presetIcons from '@unocss/preset-icons'
 import presetUno from '@unocss/preset-uno'
+import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -26,4 +27,11 @@ export default defineConfig({
       ],
     }),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+    },
+  },
 })

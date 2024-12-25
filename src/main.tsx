@@ -6,7 +6,7 @@ import './tailwind.css'
 import App from './App.tsx'
 import 'virtual:uno.css'
 import { HashRouter } from 'react-router-dom' // 使用 Routes 和 Route
-
+// https://www.ezdia.com/brand-seller-solutions/
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter basename="/">

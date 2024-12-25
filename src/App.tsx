@@ -5,7 +5,11 @@ import { useRoutes } from 'react-router-dom' // 使用 Routes 和 Route
 
 function App() {
   const element = useRoutes(router)
-  return <div className="app-container ">{element}</div>
+  return (
+    <div className="app-container w-full h-full overflow-x-hidden overflow-y-auto">
+      {element}
+    </div>
+  )
 }
 
 export default App

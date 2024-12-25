@@ -8,9 +8,15 @@ export default {
       },
       colors: {
         // Using legacy `rgba`
-        trt: 'rgba(var(--trans-bg-color), 0.5)',
+        trt: 'rgba(var(--trans-bg-color), 0.7)',
+
+        redp: '#ffffff80',
       },
+    },
+    fontSize: {
+      min: '0.8rem',
     },
   },
   plugins: [],
 }
+
