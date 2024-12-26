@@ -3,7 +3,7 @@ import { DoubleRightOutlined } from '@ant-design/icons'
 
 export default function NewCustomer() {
   return (
-    <div className="p4 ml-40 mr-40 h-52 bg-white mt-10 hover:shadow-full rounded">
+    <div className="p4 ml-40 mr-40 h-52 bg-white mt-10 hover:shadow-2xl rounded">
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">新人有利 福利专区</h1>
         <div className="cursor-pointer text-gray-500 text-min font-semibold">
