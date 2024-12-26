@@ -4,31 +4,39 @@ import {
   UserOutlined,
   CloudUploadOutlined,
 } from '@ant-design/icons'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
 import { Props } from './'
 import { useNavigate } from 'react-router-dom'
+import { register } from '@/apis/user'
 type FieldType = {
-  email?: string
-  password?: string
-  remember?: string
+  email: string
+  password: string
+  fullname: string
 }
 
 export default function SignIn({ funcParent }: Props) {
   const navigate = useNavigate()
-
-  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    navigate('/home', { state: values })
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    try {
+      const params = {
+        email: values.email,
+        password: values.password,
+        fullname: values.fullname,
+      }
+      const response = await register(params)
+      localStorage.setItem('token', response.token)
+      message.success('sign up success!')
+      navigate('/home', { state: values })
+    } catch (err) {
+      message.error('sign up failed!')
+      return err
+    }
   }
   const handleClickSignIn = () => {
     funcParent('in')
   }
   return (
-    <Form
-      name="login"
-      initialValues={{ remember: true }}
-      style={{ maxWidth: 360 }}
-      onFinish={onFinish}
-    >
+    <Form name="login" style={{ maxWidth: 360 }} onFinish={onFinish}>
       <Form.Item
         name="email"
         rules={[{ required: true, message: 'Please input your Email!' }]}

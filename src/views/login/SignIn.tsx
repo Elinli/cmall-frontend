@@ -23,10 +23,11 @@ export default function SignUp({ funcParent }: Props) {
       }
       const response = await login(params)
       localStorage.setItem('token', response.token)
+      message.success('sign in success!')
       navigate('/home', { state: values })
-      message.success('注册成功！')
     } catch (err) {
-      message.error('注册失败，请检查输入信息。')
+      message.error('sign in failed!')
+      navigate('/home', { state: values })
       return err
     }
   }

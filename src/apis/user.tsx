@@ -5,7 +5,7 @@ import {
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
-} from '../types/api'
+} from '../types/api/user'
 
 export const login = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await apiClient.post<LoginResponse>('/api/signin', data)

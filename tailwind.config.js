@@ -12,6 +12,9 @@ export default {
 
         redp: '#ffffff80',
       },
+      boxShadow: {
+        full: '19 35px 60px -15px rgba(0, 0, 0, 0.3)',
+      },
     },
     fontSize: {
       min: '0.8rem',
