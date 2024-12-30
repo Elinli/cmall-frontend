@@ -25,7 +25,6 @@ export default function SignUp({ funcParent }: LoginProps) {
       const response = await login(params)
       localStorage.setItem('token', response.token)
       setToken(response.token)
-      // const menuData = await fetchMenuList()
       setMenus()
       navigate('/dashboard', { state: values })
       message.success('sign in success!')
