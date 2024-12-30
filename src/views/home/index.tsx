@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import Carousel from './widgets/Carousel'
 import Banner from './widgets/Banner'
 import NewCustomer from './widgets/NewCustomer'
 
 export default function Home() {
   const [count, setCount] = useState(0)
+
   return (
     <div className="flex flex-col h-full">
       <Header></Header>

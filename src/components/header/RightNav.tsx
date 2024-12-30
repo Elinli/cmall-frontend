@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { NavTabs, NavType } from './config'
 import { Popover } from 'antd'
 const webSites = [
@@ -161,7 +161,7 @@ const rightNavTabs: NavTabs = [
   },
   {
     name: '联系客服',
-    path: '/bussiess',
+    path: '/chat',
     type: NavType.NAV,
   },
   {
@@ -204,13 +204,21 @@ const rightNavTabs: NavTabs = [
     className: 'w-48',
   },
 ]
+
 export default function RightNav() {
+  const navigate = useNavigate()
+  const directPath = (path: string | undefined) => {
+    if (path) {
+      navigate(path)
+    }
+  }
   const elements = rightNavTabs.map((navTab) => {
     if (navTab.type === NavType.NAV) {
       return (
         <div
           className={`text-min cursor-pointer leading-10 h-full pl-2 pr-2 ${navTab.type === NavType.NAV ? 'hover:text-white ' : 'hover:bg-white hover:text-gray-950'}`}
           key={navTab.name}
+          onClick={() => directPath(navTab.path)}
         >
           {navTab.name}
         </div>

@@ -15,6 +15,9 @@ export const login = async (data: LoginRequest): Promise<LoginResponse> => {
 export const register = async (
   data: RegisterRequest,
 ): Promise<RegisterResponse> => {
-  const response = await apiClient.post<RegisterResponse>('/api/signup', data)
+  const response = await apiClient.post<RegisterResponse>('/api/signup', {
+    ...data,
+    workspace: 'devp',
+  })
   return response.data
 }

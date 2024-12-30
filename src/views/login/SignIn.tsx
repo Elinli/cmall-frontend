@@ -2,19 +2,20 @@
 import type { FormProps } from 'antd'
 import { LockOutlined, CloudUploadOutlined } from '@ant-design/icons'
 import { Button, Form, Input, message, Flex, Checkbox } from 'antd'
-import { Props } from './'
+import { LoginProps } from './'
 import { useNavigate } from 'react-router-dom'
 import { login } from '@/apis/user'
-
+import { useAppStore } from '@/store'
 type FieldType = {
   email: string
   password: string
   fullname: string
 }
 
-export default function SignUp({ funcParent }: Props) {
+export default function SignUp({ funcParent }: LoginProps) {
   const navigate = useNavigate()
-
+  const setToken = useAppStore((state) => state.setToken)
+  const setMenus = useAppStore((state) => state.setMenus)
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
       const params = {
@@ -23,11 +24,14 @@ export default function SignUp({ funcParent }: Props) {
       }
       const response = await login(params)
       localStorage.setItem('token', response.token)
+      setToken(response.token)
+      // const menuData = await fetchMenuList()
+      setMenus()
+      navigate('/dashboard', { state: values })
       message.success('sign in success!')
-      navigate('/home', { state: values })
     } catch (err) {
       message.error('sign in failed!')
-      navigate('/home', { state: values })
+      navigate('/dashboard', { state: values })
       return err
     }
   }

@@ -10,11 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     UnoCSS({
-      shortcuts: [
-        {
-          logo: 'i-logos-react w-6em h-6em transform transition-800 hover:rotate-180',
-        },
-      ],
+      shortcuts: [],
       presets: [
         presetUno(),
         presetAttributify(),
@@ -40,6 +36,14 @@ export default defineConfig({
         target: 'http://localhost:6688',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/api'),
+      },
+      '/recommend_api/v1': {
+        target: 'https://api.juejin.cn',
+        changeOrigin: true,
+      },
+      '/events': {
+        target: 'http://127.0.0.1:6687',
+        changeOrigin: true,
       },
     },
   },

@@ -3,7 +3,7 @@ import type { TabsProps } from 'antd'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import { useState } from 'react'
-export type Props = {
+export type LoginProps = {
   funcParent: (key: string) => void
 }
 export default function Login() {

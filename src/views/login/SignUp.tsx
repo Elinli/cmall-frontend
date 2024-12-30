@@ -5,7 +5,7 @@ import {
   CloudUploadOutlined,
 } from '@ant-design/icons'
 import { Button, Form, Input, message } from 'antd'
-import { Props } from './'
+import { LoginProps } from './'
 import { useNavigate } from 'react-router-dom'
 import { register } from '@/apis/user'
 type FieldType = {
@@ -14,7 +14,7 @@ type FieldType = {
   fullname: string
 }
 
-export default function SignIn({ funcParent }: Props) {
+export default function SignIn({ funcParent }: LoginProps) {
   const navigate = useNavigate()
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {

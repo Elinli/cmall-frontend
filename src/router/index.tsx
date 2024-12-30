@@ -1,20 +1,19 @@
-import { Navigate, RouteObject } from 'react-router-dom'
-import Home from '../views/home'
-import Login from '../views/login'
-import Chat from '../views/chat' // 新增导入
+import { RouteObject } from 'react-router-dom'
+import Permission from '@/components/LayoutContainer/Permission'
+import LayoutContainer from '@/components/LayoutContainer'
+import Home from '@/views/home'
+import Login from '@/views/login'
 
+import Error from '@/components/Error'
 export interface ExtraObject {
   title?: string
   isShow?: boolean
+  children?: ChatRouter
 }
 
 export type ChatRouter = Array<RouteObject & ExtraObject>
 
 const router: ChatRouter = [
-  {
-    path: '/',
-    element: <Navigate to="/login" />,
-  },
   {
     path: '/home',
     element: <Home />,
@@ -27,10 +26,72 @@ const router: ChatRouter = [
   },
 
   {
-    path: '/chat',
-    element: <Chat />,
-    title: '聊天',
+    path: '/',
+    element: (
+      <Permission>
+        <LayoutContainer></LayoutContainer>
+      </Permission>
+    ),
+    title: '主页',
+    children: [
+      // {
+      //   path: '/chat',
+      //   element: <Chat />,
+      //   title: '即时通讯',
+      // },
+      // {
+      //   path: '/system',
+      //   title: '系统管理',
+      //   children: [
+      //     {
+      //       path: '/system/menu',
+      //       element: <Menu />,
+      //       title: '菜单设置',
+      //     },
+      //     {
+      //       path: '/system/role',
+      //       element: <Role />,
+      //       title: '角色管理',
+      //     },
+      //   ],
+      // },
+    ],
   },
+  { path: '*', element: <Error /> },
 ]
+// 用于异步加载
+// export const childernRoutes: ChatRouter = [
+//   {
+//     path: '/dashboard',
+//     // element: <DashBoard />,
+//     title: '工作台',
+//   },
+//   {
+//     path: '/chat',
+//     // element: <Chat />,
+//     title: '即时通讯',
+//   },
 
+//   {
+//     path: '/system',
+//     title: '系统管理',
+//     children: [
+//       {
+//         path: '/system/menu',
+//         // element: <Menu />,
+//         title: '菜单设置',
+//       },
+//       {
+//         path: '/system/role',
+//         // element: <Role />,
+//         title: '角色管理',
+//       },
+//       {
+//         path: '/system/department',
+//         // element: <Department />,
+//         title: '部门管理',
+//       },
+//     ],
+//   },
+// ]
 export default router

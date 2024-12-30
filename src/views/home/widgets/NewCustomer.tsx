@@ -12,7 +12,7 @@ export default function NewCustomer() {
       </div>
       <div className="flex justify-between w-full mt-6 pl-16 pr-16 cursor-pointer">
         {[1, 2, 3, 4].map((item) => (
-          <div className="flex w-52 h-28 items-center">
+          <div className="flex w-52 h-28 items-center" key={item}>
             <img src={b1} alt="" className="w-36" />
             <div className="mt-4">
               <span className="tag text-min bg-gray-100 rounded p-1 flex flex-nowrap">
