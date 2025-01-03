@@ -30,8 +30,8 @@ const columns: TableProps<DataType>['columns'] = [
     dataIndex: 'roles',
     render: (_, record: DataType) => (
       <>
-        {record.roles.map((i: number) => (
-          <div>
+        {record.roles.map((i: number, idx) => (
+          <div key={idx}>
             <a>{i}</a>
           </div>
         ))}
