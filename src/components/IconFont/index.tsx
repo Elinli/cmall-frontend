@@ -3,7 +3,6 @@ import * as Icons from '@ant-design/icons'
 type IconName = keyof typeof Icons
 type IconProps = {
   icon: IconName | null | undefined
-  [key: string]: any
 }
 export default function IconFont({ icon, ...props }: IconProps) {
   if (!icon) return null
