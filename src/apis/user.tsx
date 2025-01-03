@@ -1,4 +1,4 @@
-// src/services/userService.ts
+// src/api/user.ts
 import apiClient from '../utils/request'
 import {
   LoginRequest,

@@ -1,17 +1,21 @@
 // src/types/api.ts
 export interface User {
-  id: string
+  id: number
+  dept_id: number
   email: string
-  fullname: string
-  role?: string
-  created_at: string
+  username: string
+  phone: string
+  roles: string[]
+  created_time: string
+  update_time: string
+  status: string
 }
 
 export interface LoginRequest {
   email: string
   password: string
 }
-export type RegisterRequest = Omit<LoginRequest, 'fullname'>
+export type RegisterRequest = Omit<LoginRequest, 'username'>
 
 export interface LoginResponse {
   token: string

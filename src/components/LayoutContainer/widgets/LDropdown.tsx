@@ -1,6 +1,8 @@
+import { useAppStore } from '@/store'
 import { DownOutlined, SettingOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Dropdown, message, Space } from 'antd'
+import { useNavigate } from 'react-router'
 
 const items: MenuProps['items'] = [
   {
@@ -13,24 +15,33 @@ const items: MenuProps['items'] = [
   {
     key: 'UPDATE_PWD',
     label: '修改密码',
-    extra: '⌘P',
+    // extra: '⌘P',
   },
   {
     key: 'SIGN_OUT',
     label: '注销登录',
-    extra: '⌘B',
+    // extra: '⌘B',
   },
   {
     key: 'SYSTEM_SETTING',
     label: '系统设置',
     icon: <SettingOutlined />,
-    extra: '⌘S',
+    // extra: '⌘S',
   },
 ]
-const onClick: MenuProps['onClick'] = ({ key }) => {
-  message.info(`Click on item ${key}`)
-}
+
 export default function LDropdown() {
+  const navigate = useNavigate()
+  const setToken = useAppStore((state) => state.setToken)
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    if (key === 'SIGN_OUT') {
+      setToken('')
+      localStorage.removeItem('token')
+      navigate('/login')
+    } else {
+      message.info(`Click on item ${key}`)
+    }
+  }
   return (
     <div>
       {' '}

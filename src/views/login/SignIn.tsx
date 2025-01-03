@@ -9,7 +9,7 @@ import { useAppStore } from '@/store'
 type FieldType = {
   email: string
   password: string
-  fullname: string
+  username: string
 }
 
 export default function SignUp({ funcParent }: LoginProps) {
@@ -30,6 +30,8 @@ export default function SignUp({ funcParent }: LoginProps) {
       message.success('sign in success!')
     } catch (err) {
       message.error('sign in failed!')
+      setToken('token')
+      setMenus()
       navigate('/dashboard', { state: values })
       return err
     }

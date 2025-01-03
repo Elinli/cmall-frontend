@@ -11,7 +11,7 @@ import { register } from '@/apis/user'
 type FieldType = {
   email: string
   password: string
-  fullname: string
+  username: string
 }
 
 export default function SignIn({ funcParent }: LoginProps) {
@@ -21,7 +21,7 @@ export default function SignIn({ funcParent }: LoginProps) {
       const params = {
         email: values.email,
         password: values.password,
-        fullname: values.fullname,
+        username: values.username,
       }
       const response = await register(params)
       localStorage.setItem('token', response.token)
@@ -44,10 +44,10 @@ export default function SignIn({ funcParent }: LoginProps) {
         <Input prefix={<CloudUploadOutlined />} placeholder="Email" />
       </Form.Item>
       <Form.Item
-        name="fullname"
-        rules={[{ required: true, message: 'Please input your Fullname!' }]}
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
       >
-        <Input prefix={<UserOutlined />} placeholder="Fullname" />
+        <Input prefix={<UserOutlined />} placeholder="username" />
       </Form.Item>
       <Form.Item
         name="password"
