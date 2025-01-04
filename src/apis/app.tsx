@@ -1,8 +1,11 @@
 // src/services/userService.ts
 // import apiClient from '../utils/request'
 import { MenuResponse } from '@/types/api/system'
-
-export const fetchMenuList = async (): Promise<MenuResponse[]> => {
+import { User } from '@/types/api/user'
+type MenuRequest = Pick<User, 'id'>
+export const fetchMenuList = async ({
+  id,
+}: MenuRequest): Promise<MenuResponse[]> => {
   //   const response = await apiClient.get('/api/system/menus')
   //   return response.data
   return new Promise((resolve) => {
@@ -10,6 +13,7 @@ export const fetchMenuList = async (): Promise<MenuResponse[]> => {
       resolve([
         {
           id: '1',
+          user_id: id,
           order: 1,
           title: '工作台',
           type: 'MENU',

@@ -5,9 +5,10 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 
+const baseURL = import.meta.env.VITE_APP_API_BASE_URL
 // 创建 Axios 实例
 const apiClient: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:6688', // 替换为你的 API 基础 URL
+  baseURL, // 替换为你的 API 基础 URL
   timeout: 10000, // 请求超时时间
   headers: {
     'Content-Type': 'application/json',

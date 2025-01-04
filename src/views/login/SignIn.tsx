@@ -6,6 +6,7 @@ import { LoginProps } from './'
 import { useNavigate } from 'react-router-dom'
 import { login } from '@/apis/user'
 import { useAppStore } from '@/store'
+import { User } from '@/types/api/user'
 type FieldType = {
   email: string
   password: string
@@ -15,6 +16,7 @@ type FieldType = {
 export default function SignUp({ funcParent }: LoginProps) {
   const navigate = useNavigate()
   const setToken = useAppStore((state) => state.setToken)
+  const setUser = useAppStore((state) => state.setUser)
   const setMenus = useAppStore((state) => state.setMenus)
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
@@ -25,14 +27,12 @@ export default function SignUp({ funcParent }: LoginProps) {
       const response = await login(params)
       localStorage.setItem('token', response.token)
       setToken(response.token)
-      setMenus()
-      navigate('/dashboard', { state: values })
+      setUser(response.user as User)
+      setMenus(response.user as User)
+      navigate('/dashboard')
       message.success('sign in success!')
     } catch (err) {
       message.error('sign in failed!')
-      setToken('token')
-      setMenus()
-      navigate('/dashboard', { state: values })
       return err
     }
   }
@@ -44,7 +44,11 @@ export default function SignUp({ funcParent }: LoginProps) {
   return (
     <Form
       name="login"
-      initialValues={{ remember: true }}
+      initialValues={{
+        remember: true,
+        email: 'tcl@qq.com',
+        password: '123456',
+      }}
       style={{ maxWidth: 360 }}
       onFinish={onFinish}
     >

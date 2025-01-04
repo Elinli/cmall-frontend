@@ -8,5 +8,5 @@ export default function Permission({ children }: PermissionProps) {
   if (token) {
     return <div>{children}</div>
   }
-  return <Navigate to={'/login'} />
+  return <Navigate to={'/home'} />
 }

@@ -46,6 +46,6 @@ export const fetchMemberList = async (
       })
 
       resolve(filteredData)
-    }, 3000)
+    }, 1000)
   })
 }

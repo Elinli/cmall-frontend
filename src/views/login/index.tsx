@@ -24,7 +24,7 @@ export default function Login() {
       children: <SignUp funcParent={funcParent} />,
     },
   ]
-  const title: string = 'Welcome To Chat Room'
+  const title: string = 'Welcome To Reny Cmall'
   const onChange = (key: string) => {
     setCurrentKey(key)
   }

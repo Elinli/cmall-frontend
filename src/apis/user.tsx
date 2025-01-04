@@ -8,14 +8,14 @@ import {
 } from '../types/api/user'
 
 export const login = async (data: LoginRequest): Promise<LoginResponse> => {
-  const response = await apiClient.post<LoginResponse>('/api/signin', data)
+  const response = await apiClient.post<LoginResponse>('/api/v1/signin', data)
   return response.data
 }
 
 export const register = async (
   data: RegisterRequest,
 ): Promise<RegisterResponse> => {
-  const response = await apiClient.post<RegisterResponse>('/api/signup', {
+  const response = await apiClient.post<RegisterResponse>('/api/v1/signup', {
     ...data,
     workspace: 'devp',
   })

@@ -18,4 +18,5 @@ export interface MenuResponse {
   path: string
   children?: MenuResponse[]
   icon?: IconName | null
+  user_id?: number
 }

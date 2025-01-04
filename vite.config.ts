@@ -32,10 +32,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:6688',
+      '/api/v1': {
+        target: 'http://localhost:5174',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/api'),
+        rewrite: (path) => path.replace(/^\/api\/v1/, '/api/v1'),
       },
       '/recommend_api/v1': {
         target: 'https://api.juejin.cn',

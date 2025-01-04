@@ -33,10 +33,15 @@ const items: MenuProps['items'] = [
 export default function LDropdown() {
   const navigate = useNavigate()
   const setToken = useAppStore((state) => state.setToken)
+  const setSelectedKey = useAppStore((state) => state.setSelectedKey)
+  const userInfo = useAppStore((state) => state.userInfo) || {
+    username: '未知用户',
+  }
   const onClick: MenuProps['onClick'] = ({ key }) => {
     if (key === 'SIGN_OUT') {
       setToken('')
       localStorage.removeItem('token')
+      setSelectedKey(['/dashboard'])
       navigate('/login')
     } else {
       message.info(`Click on item ${key}`)
@@ -44,11 +49,10 @@ export default function LDropdown() {
   }
   return (
     <div>
-      {' '}
       <Dropdown menu={{ items, onClick }}>
         <a onClick={(e) => e.preventDefault()}>
           <Space>
-            Eli Shi
+            {userInfo.username}
             <DownOutlined />
           </Space>
         </a>

@@ -65,6 +65,12 @@ const searchCondition: CommonSearchType[] = [
     field: 'phone',
     label: '用户名',
   },
+  {
+    type: InputType.Input,
+    placeholder: '请输入角色',
+    field: 'role',
+    label: '角色',
+  },
 ]
 type GenerateReturnType = {
   [K in CommonSearchType['field']]: string
@@ -75,10 +81,6 @@ export default function Member() {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    fetchMemberList(searchParams)
-  }, [searchParams])
-  const handleSearch = (searchParams: GenerateReturnType) => {
-    setSearchParams(searchParams)
     setLoading(true)
     fetchMemberList(searchParams)
       .then((res) => {
@@ -87,6 +89,9 @@ export default function Member() {
       .finally(() => {
         setLoading(false)
       })
+  }, [searchParams])
+  const handleSearch = (searchParams: GenerateReturnType) => {
+    setSearchParams(searchParams)
   }
   return (
     <div className="comman-table">
@@ -96,6 +101,7 @@ export default function Member() {
           onSearch={handleSearch}
         ></CommonSearch>
         <CommonTable<DataType>
+          rowKey="id"
           tableColumns={columns}
           tableData={data as unknown as DataType[]}
         >
