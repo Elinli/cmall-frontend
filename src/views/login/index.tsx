@@ -31,8 +31,8 @@ export default function Login() {
 
   return (
     <div className="login-page w-full h-full flex justify-between items-center  ">
-      <div className="login-page-bg bg-blue-50 relative w-full h-full bg-hero-pattern">
-        <div className="login-page-bg-img absolute top-36 right-52 bg-cover bg-center bg-no-repeat border w-96 h-96 bg-tr-50 p-4 rounded-md bg-redp ">
+      <div className="login-page-bg bg-blue-50 flex items-center justify-center w-full h-full bg-hero-pattern">
+        <div className="login-page-bg-img bg-cover bg-center bg-no-repeat border w-96 h-96 bg-tr-50 p-4 rounded-md bg-redp ">
           <div>
             <div className="text-3xl text-gray-700">{title}</div>
             <Tabs items={items} onChange={onChange} activeKey={currentKey} />

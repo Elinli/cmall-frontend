@@ -46,7 +46,7 @@ export default function SignUp({ funcParent }: LoginProps) {
       name="login"
       initialValues={{
         remember: true,
-        email: 'tcl@qq.com',
+        email: 'elixy@qq.com',
         password: '123456',
       }}
       style={{ maxWidth: 360 }}

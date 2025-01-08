@@ -27,5 +27,25 @@ export function generateRoutes(routes: MenuResponse[]): ChatRouter[] {
     }
   }) as unknown as ChatRouter[]
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function formatParamsEmptyStrToNull(params: Record<string, any>) {
+  for (const key in params) {
+    if (params[key] === '') {
+      params[key] = null
+    }
+  }
+  return params
+}
+
+export function downloadFile(response: Blob, fileName: string) {
+  const data = new Blob([response], { type: 'application/vnd.ms-excel' })
+  const link = document.createElement('a')
+  link.href = URL.createObjectURL(data)
+  link.download = fileName
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(link.href)
+}
 
 export default { Icons }

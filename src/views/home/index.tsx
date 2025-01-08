@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Index'
 import Carousel from './widgets/Carousel'
 import Banner from './widgets/Banner'
 import NewCustomer from './widgets/NewCustomer'

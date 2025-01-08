@@ -6,6 +6,7 @@ interface CommonSearchProps {
   searchCondition: CommonSearchType[]
   children?: React.ReactNode
   onSearch?: (arg0: GenerateReturnType) => void
+  onReset?: () => void
 }
 type GenerateReturnType = {
   [K in CommonSearchType['field']]: string
@@ -15,6 +16,7 @@ const style: React.CSSProperties = { background: '#fff', padding: '2px 0' }
 export default function CommonSearch({
   searchCondition,
   onSearch,
+  onReset,
 }: CommonSearchProps) {
   const [formData, setFormData] = useState<GenerateReturnType>({})
 
@@ -27,6 +29,12 @@ export default function CommonSearch({
   }
   const onClickSearch = () => {
     if (onSearch) onSearch(formData)
+  }
+  const onClickReset = () => {
+    if (onReset) {
+      setFormData({})
+      onReset()
+    }
   }
   const els = searchCondition.map((item) => {
     if (item.type === InputType.Input) {
@@ -61,7 +69,7 @@ export default function CommonSearch({
           </Col>
         ))}
         <Col className="gutter-row text-right" span={6} offset={offset()}>
-          <Button onClick={onClickSearch} className="mr-3">
+          <Button onClick={onClickReset} className="mr-3">
             重置
           </Button>
           <Button type="primary" onClick={onClickSearch}>

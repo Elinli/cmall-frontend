@@ -1,6 +1,10 @@
 export interface CommonDataType {
   [key: string]: unknown
 }
+export interface Pagination {
+  pageNum: number
+  pageSize: number
+}
 
 export enum InputType {
   Input,
@@ -24,9 +28,20 @@ export enum InputType {
   Transfer,
   CheckboxGroup,
 }
+
+export interface SelectType {
+  label: string
+  value: string | number
+}
 export interface CommonSearchType {
   type: InputType
   placeholder?: string
   field: string
   label?: string
+  options?: SelectType[]
+  onChange?: (value: string) => void
+}
+
+export interface ErrorType {
+  message?: string
 }
