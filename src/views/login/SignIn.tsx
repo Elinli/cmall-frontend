@@ -18,6 +18,7 @@ export default function SignUp({ funcParent }: LoginProps) {
   const setToken = useAppStore((state) => state.setToken)
   const setUser = useAppStore((state) => state.setUser)
   const setMenus = useAppStore((state) => state.setMenus)
+  const setAllRoutes = useAppStore((state) => state.setAllRoutes)
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
       const params = {
@@ -28,7 +29,8 @@ export default function SignUp({ funcParent }: LoginProps) {
       localStorage.setItem('token', response.token)
       setToken(response.token)
       setUser(response.user as User)
-      setMenus(response.user as User)
+      await setMenus(response.user as User)
+      await setAllRoutes(response.user as User)
       navigate('/dashboard')
       message.success('sign in success!')
     } catch (err) {

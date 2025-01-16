@@ -4,7 +4,7 @@ import {
   exportMemberExcelFile,
   fetchMemberList,
   updateMember,
-} from '@/apis/members'
+} from '@/apis/member'
 import CommonSearch from '@/components/CSearch'
 import CommonTable from '@/components/CTable'
 import IconFont from '@/components/IconFont'
@@ -63,9 +63,9 @@ const searchCondition: CommonSearchType[] = [
   },
   {
     type: InputType.Input,
-    placeholder: '请输入密码',
-    field: 'password',
-    label: '密码',
+    placeholder: '请输入状态',
+    field: 'status',
+    label: '状态',
   },
   {
     type: InputType.Input,
@@ -78,16 +78,6 @@ const searchCondition: CommonSearchType[] = [
     placeholder: '请输入手机号',
     field: 'phone',
     label: '手机号',
-  },
-  {
-    type: InputType.Input,
-    placeholder: '请输入角色',
-    field: 'role',
-    label: '角色',
-    options: [
-      { label: '管理员', value: 1 },
-      { label: '普通用户', value: 2 },
-    ],
   },
 ]
 type GenerateReturnType = {
@@ -232,6 +222,7 @@ export default function Member() {
                 <Option value={1}>开发部</Option>
                 <Option value={2}>监理部</Option>
                 <Option value={3}>人事部</Option>
+                <Option value={0}>董事部</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -244,7 +235,7 @@ export default function Member() {
               <Select placeholder="请选择" allowClear mode="multiple">
                 <Option value={1}>Normal</Option>
                 <Option value={2}>Team Leader</Option>
-                <Option value={3}>Manager</Option>
+                <Option value={0}>Manager</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -317,6 +308,8 @@ export default function Member() {
       try {
         await deleteMember(initialValues.id as string)
         message.success('删除成功')
+        handleSearch(searchParams)
+        setIsModalOpen(false)
       } catch (error: unknown) {
         setLoading(false)
         message.error((error as ErrorType)?.message || '删除失败')
@@ -329,6 +322,8 @@ export default function Member() {
           password: '123456',
         }
         await createMember(params as CreateMemberRequest)
+        handleSearch(searchParams)
+        setIsModalOpen(false)
       } catch (error: unknown) {
         setLoading(false)
         message.error((error as ErrorType)?.message || '新增失败')
@@ -341,14 +336,15 @@ export default function Member() {
           status: 'active',
         }
         await updateMember(params as UpdateMemberRequest)
+        handleSearch(searchParams)
+        setIsModalOpen(false)
       } catch (error: unknown) {
         setLoading(false)
         message.error((error as ErrorType)?.message || '编辑失败')
       }
     }
-    handleSearch(searchParams)
+
     setLoading(false)
-    setIsModalOpen(false)
   }
   const onPaginationChange = (page: number, pageSize: number) => {
     setSearchParams({
@@ -368,7 +364,7 @@ export default function Member() {
       })
   }
   return (
-    <div className="comman-table">
+    <div className="member-page">
       <Spin spinning={loading}>
         <CommonSearch
           searchCondition={searchCondition}

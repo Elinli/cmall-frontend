@@ -1,6 +1,6 @@
 import { LazyLoad } from '@/components/LazyLoad'
 import { ChatRouter } from '@/router'
-import { MenuResponse } from '@/types/api/system'
+import { MenuType } from '@/types/api/system'
 import * as Icons from '@ant-design/icons'
 export type IconName = keyof typeof Icons
 export type IconProps = {
@@ -8,22 +8,22 @@ export type IconProps = {
 }
 export const allIcons = Object.keys(Icons)
 
-export function generateRoutes(routes: MenuResponse[]): ChatRouter[] {
-  return routes.map((item: MenuResponse) => {
+export function generateRoutes(routes: MenuType[]): ChatRouter[] {
+  return routes.map((item: MenuType) => {
     if (item.children) {
       return {
         ...item,
-        children: item.children.map((item: MenuResponse) => {
+        children: item.children.map((item: MenuType) => {
           return {
             ...item,
-            element: LazyLoad(item.path),
+            element: item.path ? LazyLoad(item.path) : null,
           }
         }),
       }
     }
     return {
       ...item,
-      element: LazyLoad(item.path),
+      element: item.path ? LazyLoad(item.path) : null,
     }
   }) as unknown as ChatRouter[]
 }

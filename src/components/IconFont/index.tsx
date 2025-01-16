@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Icons from '@ant-design/icons'
-type IconName = keyof typeof Icons
+export type IconName = keyof typeof Icons
 type IconProps = {
   icon: IconName | null | undefined
+  className?: string
+  onClick?: () => void
 }
 export default function IconFont({ icon, ...props }: IconProps) {
   if (!icon) return null

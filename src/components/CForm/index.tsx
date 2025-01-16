@@ -34,14 +34,24 @@ interface Props extends FormProps {
   formItems?: FormItem[]
   className?: string
   children?: ReactNode
+  maxWidth?: number
   labelCol?: Partial<ColProps>
   wrapperCol?: Partial<ColProps>
   handleFinish: FormProps['onFinish']
+  formValues: FormData
 }
 
 const CForm = forwardRef((props: Props, ref: LegacyRef<FormInstance>) => {
   const [form] = Form.useForm()
-  const { formItems, children, handleFinish, initialValues } = props
+  const {
+    formItems,
+    children,
+    handleFinish,
+    initialValues,
+    maxWidth,
+    formValues,
+  } = props
+  form.setFieldsValue(formValues)
   const onFinish: FormProps['onFinish'] = (values) => {
     if (handleFinish) {
       handleFinish?.(values)
@@ -52,7 +62,7 @@ const CForm = forwardRef((props: Props, ref: LegacyRef<FormInstance>) => {
       {...formItemLayout}
       form={form}
       ref={ref}
-      style={{ maxWidth: 720 }}
+      style={{ maxWidth: maxWidth || 720 }}
       initialValues={{ ...initialValues }}
       onFinish={onFinish}
     >

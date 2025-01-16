@@ -45,3 +45,9 @@ export interface CommonSearchType {
 export interface ErrorType {
   message?: string
 }
+
+export enum MenuType {
+  Menu = 'menu',
+  Button = 'button',
+  Link = 'link',
+}

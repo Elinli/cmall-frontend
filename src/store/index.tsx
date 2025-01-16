@@ -1,5 +1,5 @@
-import { fetchMenuList } from '@/apis/app'
-import { MenuResponse } from '@/types/api/system'
+import { fetchAllMenuList, fetchMenuList } from '@/apis/app'
+import { MenuType } from '@/types/api/system'
 import { User } from '@/types/api/user'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
@@ -11,7 +11,8 @@ type State = {
   appId: string | number | null
   selectedKey: string[]
   breadcrumbs: string[]
-  menus: MenuResponse[]
+  menus: MenuType[]
+  allRoutes: MenuType[]
 }
 
 type Actions = {
@@ -21,6 +22,7 @@ type Actions = {
   setSelectedKey: (key: string[]) => void
   setBreadcrumbs: (breadcrumbs: string[]) => void
   setMenus: (userInfo: User) => void
+  setAllRoutes: (userInfo: User) => void
 }
 
 export const useAppStore = create<State & Actions>()(
@@ -32,6 +34,7 @@ export const useAppStore = create<State & Actions>()(
       selectedKey: [],
       breadcrumbs: [],
       menus: [],
+      allRoutes: [],
       setToken: (token: string) =>
         set((state) => {
           state.token = token
@@ -57,6 +60,12 @@ export const useAppStore = create<State & Actions>()(
         const menus = await fetchMenuList({ id: userInfo.id })
         set((state) => {
           state.menus = menus
+        })
+      },
+      setAllRoutes: async (userInfo: User) => {
+        const menus = await fetchAllMenuList({ id: userInfo.id })
+        set((state) => {
+          state.allRoutes = menus
         })
       },
     })),

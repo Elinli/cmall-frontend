@@ -5,13 +5,13 @@ import Logo from '@/assets/logo.svg'
 
 import Icon from '@/components/IconFont'
 import { useAppStore } from '@/store'
-import { MenuResponse } from '@/types/api/system'
+import { MenuType } from '@/types/api/system'
 import { useEffect, useState } from 'react'
 type MenuItem = Required<MenuProps>['items'][number]
 const { Sider } = Layout
 function setMenuItem(
   label: React.ReactNode,
-  key: React.Key,
+  key?: React.Key,
   icon?: React.ReactNode,
   children?: MenuItem[],
 ): MenuItem {
@@ -30,7 +30,7 @@ interface LayoutSiderProps {
 }
 
 type MenuClickEvent = Parameters<Required<MenuProps>['onClick']>[0]
-function generateMenus(menus: MenuResponse[]): MenuItem[] {
+function generateMenus(menus: MenuType[]): MenuItem[] {
   return menus.map((menu) => {
     if (menu.children && menu.children.length > 0) {
       return setMenuItem(
